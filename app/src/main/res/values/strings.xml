@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">My Weather</string>
+    <string name="design_image">Design_Image</string>
+    <string name="splash_screen_text">Always got latest weather updates</string>
+    <string name="today">Today</string>
+    <string name="_00_00_c">00:00 C</string>
+</resources>
