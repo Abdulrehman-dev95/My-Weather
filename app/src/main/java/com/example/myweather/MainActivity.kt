@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.appcompat.widget.SearchView
 import com.example.myweather.MainViewModel.WeatherUiState
 import com.example.myweather.databinding.ActivityMainBinding
 import com.example.myweather.utils.Utils
@@ -23,9 +24,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(binding.root)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(binding.main) { _, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            binding.mainContent.setPadding(
+                systemBars.left,
+                systemBars.top,
+                systemBars.right,
+                systemBars.bottom
+            )
             insets
         }
 
@@ -36,21 +42,29 @@ class MainActivity : AppCompatActivity() {
         viewModel.weatherData.observe(this) { uiState ->
             when (uiState) {
                 is WeatherUiState.Success -> {
-                    val conditions = uiState.weatherData.weather.firstOrNull()?.main ?: "Unknown"
-                    binding.today.text = "${uiState.weatherData.main.temp.toString()} C°"
+                    val conditions = uiState.weatherData.weather.firstOrNull()?.main
+                        ?: getString(R.string.unknown)
+                    binding.today.text =
+                        getString(R.string.temp_format, uiState.weatherData.main.temp)
                     binding.cityText.text = uiState.weatherData.name
                     binding.weatherTextView.text =
-                        uiState.weatherData.weather.firstOrNull()?.main ?: "Unknown"
-                    binding.maxTempView.text = "${uiState.weatherData.main.temp_max.toString()} C°"
-                    binding.minTempView.text =  "${uiState.weatherData.main.temp_min.toString()} C°"
+                        uiState.weatherData.weather.firstOrNull()?.main
+                            ?: getString(R.string.unknown)
+                    binding.maxTempView.text =
+                        getString(R.string.temp_format, uiState.weatherData.main.temp_max)
+                    binding.minTempView.text =
+                        getString(R.string.temp_format, uiState.weatherData.main.temp_min)
                     binding.dayTextView.text = Utils.dayName()
                     binding.dateTextView.text = Utils.date()
-                    binding.humidity.text = "${uiState.weatherData.main.humidity.toString()} %"
-                    binding.wind.text = uiState.weatherData.wind.speed.toString()
+                    binding.humidity.text =
+                        getString(R.string.humidity_format, uiState.weatherData.main.humidity)
+                    binding.wind.text =
+                        getString(R.string.wind_speed_format, uiState.weatherData.wind.speed)
                     binding.condition.text = conditions
                     binding.sunset.text = Utils.time(uiState.weatherData.sys.sunset.toLong())
                     binding.sunrise.text = Utils.time(uiState.weatherData.sys.sunrise.toLong())
-                    binding.seaLevel.text = uiState.weatherData.main.sea_level.toString()
+                    binding.seaLevel.text =
+                        getString(R.string.sea_level_format, uiState.weatherData.main.sea_level)
                     changeImagesAccordingToWeatherCondition(conditions)
                     binding.loadingView.visibility = View.GONE
                 }
@@ -65,11 +79,10 @@ class MainActivity : AppCompatActivity() {
                 WeatherUiState.Loading -> {
                     binding.loadingView.visibility = View.VISIBLE
                     binding.button.visibility = View.GONE
-                    binding.loadingText.text = "Please! wait Loading"+"😘"
+                    binding.loadingText.text = getString(R.string.loading_message)
                     binding.loadingBar.visibility = View.VISIBLE
                 }
             }
-
         }
         searchCity()
         binding.button.setOnClickListener {
@@ -77,7 +90,6 @@ class MainActivity : AppCompatActivity() {
                 apiKey = BuildConfig.API_KEY,
                 units = "metric"
             )
-
         }
 
 
@@ -85,13 +97,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun searchCity() {
         val searchView = binding.searchBar
-        searchView.setOnQueryTextListener(object : android.widget.SearchView.OnQueryTextListener {
-            override fun onQueryTextChange(p0: String?): Boolean {
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextChange(newText: String?): Boolean {
                 return true
             }
 
-            override fun onQueryTextSubmit(p0: String?): Boolean {
-                p0?.let {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let {
                     viewModel.fetchWeatherData(
                         city = it,
                         apiKey = BuildConfig.API_KEY,
@@ -106,12 +118,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun changeImagesAccordingToWeatherCondition(conditions: String) {
         when (conditions) {
-            "Clear Sky", "Sunny", "Clear" -> {
+               "Clear Sky", "Sunny", "Clear" -> {
                 binding.main.setBackgroundResource(R.drawable.sunny_background)
                 binding.lottieAnimationView.setAnimation(R.raw.sun)
             }
 
-            "Partly Clouds", "Clouds", "Overcast", "Mist", "Foggy" -> {
+            "Partly Clouds", "Clouds", "Overcast", "Mist", "Foggy", "Haze" -> {
                 binding.main.setBackgroundResource(R.drawable.colud_background)
                 binding.lottieAnimationView.setAnimation(R.raw.cloud)
             }
@@ -122,7 +134,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             "Light Snow", "Moderate Snow", "Heavy Snow", "Blizzard" -> {
-                binding.main.setBackgroundResource(R.drawable.snow_background)
+                binding.main.setBackgroundResource(R.drawable.rain_background)
                 binding.lottieAnimationView.setAnimation(R.raw.snow)
             }
 

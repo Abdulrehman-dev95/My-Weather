@@ -1,8 +1,8 @@
 package com.example.myweather.data
 
 import android.util.Log
-import com.example.myweather.model.WeatherData
-import com.example.myweather.network.Api
+import com.example.myweather.data.model.WeatherData
+import com.example.myweather.data.remote.Api
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

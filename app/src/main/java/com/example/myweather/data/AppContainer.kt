@@ -1,6 +1,6 @@
 package com.example.myweather.data
 
-import com.example.myweather.network.Api
+import com.example.myweather.data.remote.Api
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

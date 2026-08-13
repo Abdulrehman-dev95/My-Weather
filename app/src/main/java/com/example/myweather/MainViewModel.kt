@@ -1,6 +1,5 @@
 package com.example.myweather
 
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,7 +7,7 @@ import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.AP
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.myweather.data.NetworkRepository
-import com.example.myweather.model.WeatherData
+import com.example.myweather.data.model.WeatherData
 
 class MainViewModel(private val networkRepository: NetworkRepository) : ViewModel() {
 
@@ -32,11 +31,9 @@ class MainViewModel(private val networkRepository: NetworkRepository) : ViewMode
             result.onFailure {
                 _weatherData.value = WeatherUiState.Error(it.message ?: "Unknown error")
             }
-
         }
-
-
     }
+
 
 
     companion object {

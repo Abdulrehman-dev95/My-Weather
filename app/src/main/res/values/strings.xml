@@ -4,4 +4,10 @@
     <string name="splash_screen_text">Always got latest weather updates</string>
     <string name="today">Today</string>
     <string name="_00_00_c">00:00 C</string>
+    <string name="temp_format">%.1f C°</string>
+    <string name="humidity_format">%d %%</string>
+    <string name="wind_speed_format">%.1f m/s</string>
+    <string name="sea_level_format">%d hPa</string>
+    <string name="loading_message">Please! wait Loading 😘</string>
+    <string name="unknown">Unknown</string>
 </resources>

@@ -1,4 +1,11 @@
-package com.example.myweather.model
+package com.example.myweather.data.model
+
+import com.example.myweather.model.Clouds
+import com.example.myweather.model.Coord
+import com.example.myweather.model.Main
+import com.example.myweather.model.Sys
+import com.example.myweather.model.Weather
+import com.example.myweather.model.Wind
 
 data class WeatherData(
     val base: String,
