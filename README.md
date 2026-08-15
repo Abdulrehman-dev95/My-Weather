@@ -4,9 +4,9 @@
 
 ## 📱 App Screenshots
 
-| Search                                             | Weather Details                                    | City Weather                                       |
+| Home Screen                                             | Clouds Screen                                    | Splash Screen                                    
 | -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
-| <img src="screenshots/weather_1.png" width="250"/> | <img src="screenshots/weather_2.png" width="250"/> | <img src="screenshots/weather_3.png" width="250"/> |
+| <img src="app/Screenshots/Home Screen.jpeg" width="250"/> | <img src="app/Screenshots/Clouds Screen.jpeg" width="250"/> | <img src="app/Screenshots/Splash Screen.jpeg" width="250"/> |
 
 ## 📝 Description
 
