@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(binding.main) { _, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            binding.mainContent.setPadding(
+            binding.mainContent.setPaddingRelative(
                 systemBars.left,
                 systemBars.top,
                 systemBars.right,
@@ -124,7 +124,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             "Partly Clouds", "Clouds", "Overcast", "Mist", "Foggy", "Haze" -> {
-                binding.main.setBackgroundResource(R.drawable.colud_background)
+                binding.main.setBackgroundResource(R.drawable.cloud_background)
                 binding.lottieAnimationView.setAnimation(R.raw.cloud)
             }
 

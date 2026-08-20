@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/spalsh_screen"
+    android:background="@drawable/splash_screen"
     android:fitsSystemWindows="true"
     tools:context=".SplashActivity">
 
@@ -15,7 +15,7 @@
         android:layout_height="140dp"
         android:layout_marginTop="340dp"
         android:contentDescription="@string/design_image"
-        android:src="@drawable/white_cloud"
+        app:srcCompat="@drawable/white_cloud"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,12 +23,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100.dp"
+        android:layout_marginTop="100dp"
         android:fontFamily="@font/merriweathersans_semibold"
         android:text="@string/splash_screen_text"
         android:textAlignment="center"
         android:textColor="@android:color/white"
-        android:textSize="20.sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@id/imageView"
         app:layout_constraintStart_toStartOf="@id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
